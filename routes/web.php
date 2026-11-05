@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Models\Student;
+use Illuminate\Support\Facades\Storage;
 
 // Guest Routes
 Route::middleware('guest')->group(function(){
@@ -30,6 +31,15 @@ Route::post('/contact', [ContactController::class, 'send'])->name('contact.send'
 Route::get('/terms',function(){
                 return view('terms');
                 });
+
+Route::get('/blog-images/{filename}', function (string $filename) {
+    $path = "blog_images/{$filename}";
+    $disk = Storage::disk('public');
+
+    abort_unless($disk->exists($path), 404);
+
+    return $disk->response($path);
+})->where('filename', '[A-Za-z0-9_-]+\\.(?:jpe?g|png|gif|svg)')->name('blog-images.show');
 
 // Authenticated Routes
 Route::middleware('auth')->group(function(){

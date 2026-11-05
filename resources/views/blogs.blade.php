@@ -18,7 +18,7 @@
                     <article class="flex h-[420px] flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:shadow-md">
                         @if ($blog->image)
                             <img
-                                src="{{ asset('storage/' . $blog->image) }}"
+                                src="{{ route('blog-images.show', basename($blog->image)) }}"
                                 alt="{{ $blog->title }}"
                                 class="h-44 w-full shrink-0 object-cover"
                             >

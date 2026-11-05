@@ -18,7 +18,7 @@
         {{-- Blog Image --}}
         @if ($blog->image)
             <img
-                src="{{ asset('storage/' . $blog->image) }}"
+                src="{{ route('blog-images.show', basename($blog->image)) }}"
                 alt="{{ $blog->title }}"
                 class="w-full h-96 object-cover rounded-xl mb-6"
             >
